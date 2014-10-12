@@ -1,6 +1,6 @@
 /*
-  main.cpp - Main loop for Arduino sketches
-  Copyright (c) 2005-2013 Arduino Team.  All right reserved.
+  EEPROM.h - EEPROM library
+  Copyright (c) 2006 David A. Mellis.  All right reserved.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -17,34 +17,19 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <Arduino.h>
+#ifndef EEPROM_h
+#define EEPROM_h
 
-//Declared weak in Arduino.h to allow user redefinitions.
-int atexit(void (*func)()) { return 0; }
+#include <inttypes.h>
 
-// Weak empty variant initialization function.
-// May be redefined by variant files.
-void initVariant() __attribute__((weak));
-void initVariant() { }
-
-int main(void)
+class EEPROMClass
 {
-	init();
+  public:
+    uint8_t read(int);
+    void write(int, uint8_t);
+};
 
-	initVariant();
+extern EEPROMClass EEPROM;
 
-#if defined(USBCON)
-	USBDevice.attach();
 #endif
-	
-	setup();
-    
-	for (;;)
-	{
-		loop();
-		if (serialEventRun) serialEventRun();
-	}
-        
-	return 0;
-}
 
