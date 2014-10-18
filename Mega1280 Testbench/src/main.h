@@ -10,6 +10,10 @@
 
 #include "arduino/Arduino.h"
 #include "greenOmatic/greenOmatic_core.h"
+#include "arduino/RadioHead/RH_ASK.h"
+
+//// TUNING PARAMETERS
+#define LOOP_DELAY 5000 //ms
 
 
 //// PIN DEFINITIONS
@@ -20,6 +24,7 @@
 /// I2C
 #define I2C_SDA 0
 #define I2C_SCL 0
+
 /// I2C PERIPHERALS
 
 /// SPI
@@ -36,14 +41,22 @@
 // NRF905 RF
 
 
+// RF
+#define ASK_RF_RX_PIN	36
+
+
+// DHT Sensors
+//#define DHT11_PIN 16
+#define DHT21_PIN 49
+
+
 //// Function Definitions
-int main(void);
-void setup(void);
+int 	main	(void);
+void 	setup	(void);
 
 //// Object Definitions
 Plant plant_0();
 Plant plant_1();
-
 
 
 #endif /* MAIN_H_ */

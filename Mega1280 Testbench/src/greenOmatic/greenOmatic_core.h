@@ -1,8 +1,8 @@
 
 /// Base Files
 #include "plant.h"
-#include "sensors.h"
-#include "actuators.h"
+#include "sensor.h"
+#include "actuator.h"
 #include "comms.h"
 
 /// Testing

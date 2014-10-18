@@ -8,9 +8,21 @@
 #include "sensor.h"
 
 
-sensor::sensor() {
-	// TODO Auto-generated constructor stub
+sensor::sensor ()
+{
+	sensor_ID = 0;
+	pin = 0;
+}
 
+sensor::sensor(	unsigned int 	_ID,
+				sensor_types 	_type,
+				interface_types _interface,
+				unsigned int    _pin)
+{
+	sensor_ID 	= _ID;
+	type 		= _type;
+	interface 	= _interface;
+	pin 		= _pin;
 }
 
 sensor::~sensor() {

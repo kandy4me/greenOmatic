@@ -8,7 +8,7 @@
 #ifndef COMMS_H_
 #define COMMS_H_
 
-#include "ethernet.h"
+
 
 
 

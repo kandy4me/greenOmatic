@@ -7,12 +7,11 @@
 
 #include "plant.h"
 
-plant::plant() {
+Plant::Plant() {
 	// TODO Auto-generated constructor stub
-
 }
 
-plant::~plant() {
+Plant::~Plant() {
 	// TODO Auto-generated destructor stub
 }
 

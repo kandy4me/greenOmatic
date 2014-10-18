@@ -1,8 +1,8 @@
 #ifndef PLANT_H_
 #define PLANT_H_
 
-#include "sensors.h"
-#include "actuators.h"
+#include "sensor.h"
+#include "actuator.h"
 
 class Plant {
 public:
