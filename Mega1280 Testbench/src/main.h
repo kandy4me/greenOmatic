@@ -30,7 +30,9 @@
 
 // RF, see RH_ASK.h for more
 extern RH_ASK 	RF_Transmitter;
-//extern RH_ASK 	RF_Receiver;
+#define ASK_RX_PIN 	0
+#define ASK_TX_PIN 	12
+#define ASK_BAUD 	2400
 
 // DHT Sensors
 extern dht 	DHT;

@@ -2,9 +2,7 @@
 
 // Objects
 dht 	DHT;
-RH_ASK 	RF_Transmitter;
-//RH_ASK( speed = 2000, uint8_t rxPin = 11, uint8_t txPin = 12, uint8_t pttPin = 10, bool pttInverted = false);
-
+RH_ASK 	RF_Transmitter( ASK_BAUD, ASK_RX_PIN, ASK_TX_PIN, 10, false); // (uint16_t speed, uint8_t rxPin, uint8_t txPin, uint8_t pttPin, bool pttInverted);
 
 
 typedef union
@@ -64,9 +62,9 @@ int main(void)
 	{
 		digitalWrite(13, HIGH);
 
-
 	    String new_msg = "Loop #";
 	    new_msg.concat(frame);
+	    status_msg.number = frame;
 
 		/// Read in sensor values
 		int DHT11_chk = DHT.read11(DHT11_PIN);
@@ -76,9 +74,9 @@ int main(void)
 			{
 				// DISPLAY DATA
 				Serial.print("DHT11 Measurments : ");
-				Serial.print(DHT.humidity, 2);
+				Serial.print((double)DHT.humidity, 2);
 				Serial.print("RH , ");
-				Serial.print(DHT.temperature);
+				Serial.print((double)DHT.temperature);
 				Serial.println("degC");
 				break;
 			}
@@ -99,18 +97,16 @@ int main(void)
 			}
 		}
 
-	    const char *msg = "hello";
+	    const char *msg = "Test Transmission";
 	    RF_Transmitter.send((uint8_t *)msg, strlen(msg));
 	    RF_Transmitter.waitPacketSent();
 
-
 	    //RF_Transmitter.send((uint8_t *)status_msg, 9+strlen((const char*)status_msg));
-	    RF_Transmitter.send((uint8_t *)status_msg.container, 70);
-	    RF_Transmitter.waitPacketSent();
+	    //RF_Transmitter.send((uint8_t *)status_msg.container, 70);
+	    //RF_Transmitter.waitPacketSent();
 		//Serial.println(*status_msg);
 
 		digitalWrite(13, LOW);
-
 		delay (LOOP_DELAY);
 	};
 

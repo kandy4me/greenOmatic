@@ -6,16 +6,11 @@
 #ifndef RH_ASK_h
 #define RH_ASK_h
 
-#define ASK_RX_PIN 	11
-#define ASK_TX_PIN 	12
-#define ASK_BAUD 	2000
-
-
 #include "RHGenericDriver.h"
 
 // Maximum message length (including the headers, byte count and FCS) we are willing to support
 // This is pretty arbitrary
-#define RH_ASK_MAX_PAYLOAD_LEN 64
+#define RH_ASK_MAX_PAYLOAD_LEN 67
 
 // The length of the headers we add (To, From, Id, Flags)
 // The headers are inside the payload and are therefore protected by the FCS
@@ -34,7 +29,7 @@
 #endif //RH_ASK_RX_SAMPLES_PER_BIT  
 
 /// The size of the receiver ramp. Ramp wraps modulo this number
-#define RH_ASK_RX_RAMP_LEN 255
+#define RH_ASK_RX_RAMP_LEN 160
 
 // Ramp adjustment parameters
 // Standard is if a transition occurs before RH_ASK_RAMP_TRANSITION (80) in the ramp,
@@ -207,7 +202,7 @@ public:
     /// \param[in] txPin The pin that is used to send data to the transmitter
     /// \param[in] pttPin The pin that is connected to the transmitter controller. It will be set HIGH to enable the transmitter (unless pttInverted is true).
     /// \param[in] pttInverted true if you desire the pttin to be inverted so that LOW wil enable the transmitter.
-    RH_ASK(uint16_t speed = ASK_BAUD, uint8_t rxPin = ASK_RX_PIN, uint8_t txPin = ASK_TX_PIN, uint8_t pttPin = 10, bool pttInverted = false);
+    RH_ASK(uint16_t speed = 2000, uint8_t rxPin = 11, uint8_t txPin = 12, uint8_t pttPin = 10, bool pttInverted = false);
 
     /// Initialise the Driver transport hardware and software.
     /// Make sure the Driver is properly configured before calling init().
