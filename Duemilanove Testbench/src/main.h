@@ -9,8 +9,9 @@
 #define MAIN_H_
 
 #include "arduino/Arduino.h"
+#include "arduino/VirtualWire/VirtualWire.h"
+
 #include "greenOmatic/greenOmatic_core.h"
-#include "arduino/RadioHead/RH_ASK.h"
 
 //// TUNING PARAMETERS
 #define LOOP_DELAY 3000 //ms
@@ -38,22 +39,15 @@
 #define SPI_SEL_SD 4
 #define SPI_SEL_WIZNET 10
 
-// NRF905 RF
-
-
 // RF
-//extern RH_ASK 	RF_Transmitter;
-//#define ASK_RF_TX_PIN	12
-
-extern RH_ASK 	RF_Receiver;
-#define ASK_RF_RX_PIN	36
-
+#define RF_BAUD		2000
+#define RF_RX_PIN	11
 
 
 // DHT Sensors
 extern dht 	DHT;
 //#define DHT11_PIN 16
-#define DHT21_PIN 49
+//#define DHT21_PIN 49
 
 
 //// ACTUATORS

@@ -2,8 +2,6 @@
 
 // Objects
 dht 	DHT;
-//RH_ASK 	RF_Transmitter;
-RH_ASK 	RF_Receiver;
 
 
 typedef union
@@ -39,28 +37,12 @@ void setup(void)
     Serial.println(DHT21_PIN);
 #endif
 
-#if ASK_RF_RX_PIN and not ASK_RF_TX_PIN
-	RF_Receiver.setModeRx();
-    if ( !RF_Receiver.init() ) {
-         Serial.println("RadioHead init failed");
-    } else {
-        Serial.print("ASK RF Receiver configured on pin ");
-		Serial.println(ASK_RF_RX_PIN);
-		Serial.print("ASK RF configured at Baud ");
-		Serial.println(ASK_BAUD);
-    }
-#elif ASK_RF_TX_PIN and not ASK_RF_RX_PIN
-    RF_Transmitter.setModeTx();
-    if ( !RF_Transmitter.init() ) {
-         Serial.println("RadioHead init failed");
-    } else {
-        Serial.print("ASK RF Transmitter configured on pin ");
-		Serial.println(ASK_RF_TX_PIN);
-
-		Serial.print("ASK RF configured at Baud ");
-		Serial.println(ASK_BAUD);
-    }
-#endif
+	pinMode(RF_RX_PIN,INPUT);
+	vw_set_rx_pin(RF_RX_PIN);
+    vw_setup(RF_BAUD);
+    vw_rx_start  ();
+	Serial.print ("RF RX Baud = ");
+	Serial.println(RF_BAUD, DEC);
 
 }
 
@@ -71,17 +53,9 @@ int main(void)
 	setup();
 
     /// runtime stacks
-#ifdef ASK_RF_RX_PIN
-    uint8_t buf[RH_ASK_MAX_MESSAGE_LEN];
+    uint8_t buf[VW_MAX_MESSAGE_LEN];
     uint8_t buflen = sizeof(buf);
-#endif
 
-    status_msg.header[0] = 'L';
-    status_msg.header[1] = 'o';
-    status_msg.header[2] = 'o';
-    status_msg.header[3] = 'p';
-    status_msg.header[4] = ' ';
-    status_msg.header[5] = '#';
 
     /// loop control
 	for( unsigned long int frame=0;;frame++)
@@ -92,91 +66,16 @@ int main(void)
 	    String new_msg = "Loop #";
 	    new_msg.concat(frame);
 
-		/// Read in sensor values
-#ifdef ASK_RF_RX_PIN
-		// Check for RF messages
-	    if (RF_Receiver.recv(buf, &buflen)) // Non-blocking
-	    {
-	        int i;
-	        // Message with a good checksum received, dump it.
-	        RF_Receiver.printBuffer("RF Got:", buf, buflen);
-	    }
-#endif
-
-#ifdef DHT11_PIN
-		int DHT11_chk = DHT.read11(DHT11_PIN);
-		switch (DHT11_chk)
+	    // check RF
+		uint8_t  buff_rf      [VW_MAX_MESSAGE_LEN];
+		uint8_t  len_rf   =    VW_MAX_MESSAGE_LEN;
+		if(vw_get_message(buff_rf, &len_rf))
 		{
-			case DHTLIB_OK:
-			{
-				// DISPLAY DATA
-				Serial.print("DHT11 Measurments : ");
-				Serial.print(DHT.humidity);
-				Serial.print("RH , ");
-				Serial.print(DHT.temperature);
-				Serial.println("degC");
-				break;
-			}
-			case DHTLIB_ERROR_CHECKSUM:
-			{
-				Serial.println("DHT11 Checksum error!\t");
-				break;
-			}
-			case DHTLIB_ERROR_TIMEOUT:
-			{
-				Serial.println("DHT11 Time-out error!\t");
-				break;
-			}
-			default:
-			{
-				Serial.println("DHT11 Unknown error!!!\t");
-				break;
-			}
+			Serial.print("RF: ");
+			for(uint8_t i = 0; i < len_rf; i++)
+				Serial.print((char)buff_rf[i]);
+			Serial.println();
 		}
-#endif
-
-#ifdef DHT21_PIN
-		Serial.print("DHT21 Status = ");
-		int DHT21_chk = DHT.read21(DHT21_PIN);
-		switch (DHT21_chk)
-		{
-			case DHTLIB_OK:
-			{
-				Serial.print("OK!");
-
-				// DISPLAY DATA
-				Serial.print("\tMeasurments : ");
-				Serial.print(DHT.humidity);
-				Serial.print("RH , ");
-				Serial.print(DHT.temperature);
-				Serial.println("degC");
-				break;
-			}
-			case DHTLIB_ERROR_CHECKSUM:
-			{
-				Serial.println("Checksum error!\t");
-				break;
-			}
-			case DHTLIB_ERROR_TIMEOUT:
-			{
-				Serial.println("Time-out error!\t");
-				break;
-			}
-			default:
-			{
-				Serial.println("Unknown error!!!\t");
-				break;
-			}
-		}
-#endif
-
-
-#ifdef ASK_RF_TX_PIN
-	    //RF_Transmitter.send((uint8_t *)status_msg, 9+strlen((const char*)status_msg));
-	    RF_Transmitter.send((uint8_t *)status_msg.container, 70);
-	    RF_Transmitter.waitPacketSent();
-		//Serial.println(*status_msg);
-#endif
 
 		digitalWrite(13, LOW);
 
