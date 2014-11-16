@@ -13,7 +13,7 @@
 #include "arduino/RadioHead/RH_ASK.h"
 
 //// TUNING PARAMETERS
-#define LOOP_DELAY 5000 //ms
+#define LOOP_DELAY 3000 //ms
 
 
 //// PIN DEFINITIONS
@@ -42,17 +42,29 @@
 
 
 // RF
+//extern RH_ASK 	RF_Transmitter;
+//#define ASK_RF_TX_PIN	12
+
+extern RH_ASK 	RF_Receiver;
 #define ASK_RF_RX_PIN	36
 
 
+
 // DHT Sensors
+extern dht 	DHT;
 //#define DHT11_PIN 16
 #define DHT21_PIN 49
+
+
+//// ACTUATORS
+#define Relay0_Pin 7
+
 
 
 //// Function Definitions
 int 	main	(void);
 void 	setup	(void);
+
 
 //// Object Definitions
 Plant plant_0();

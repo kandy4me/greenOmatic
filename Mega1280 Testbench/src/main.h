@@ -9,50 +9,45 @@
 #define MAIN_H_
 
 #include "arduino/Arduino.h"
-#include "greenOmatic/greenOmatic_core.h"
 #include "arduino/RadioHead/RH_ASK.h"
+#include "arduino/Wire/Wire.h"
+
+#include "greenOmatic/greenOmatic_core.h"
+
 
 //// TUNING PARAMETERS
 #define LOOP_DELAY 5000 //ms
 
 
 //// PIN DEFINITIONS
-/// Serial (RS232)
-#define UART_RX 0
-#define UART_TX 1
-
-/// I2C
-#define I2C_SDA 0
-#define I2C_SCL 0
-
 /// I2C PERIPHERALS
-
-/// SPI
-#define SPI_MOSI 11
-#define SPI_MISO 12
-#define SPI_SCK  13
-
+//
 /// SPI PERIPHERALS
 // Ethernet Shield ( http://arduino.cc/en/Main/ArduinoEthernetShield )
-#define WIZNET_INTERRUPT 2// not supported by ethernet library; need to solder jumper
-#define SPI_SEL_SD 4
-#define SPI_SEL_WIZNET 10
+#define WIZNET_INTERRUPT 	2 // not supported by ethernet library; need to solder jumper
+#define SPI_SEL_SD 			4
+#define SPI_SEL_WIZNET 		10
 
-// NRF905 RF
-
-
-// RF
-#define ASK_RF_RX_PIN	36
-
+// RF, see RH_ASK.h for more
+extern RH_ASK 	RF_Transmitter;
+//extern RH_ASK 	RF_Receiver;
 
 // DHT Sensors
-//#define DHT11_PIN 16
-#define DHT21_PIN 49
+extern dht 	DHT;
+#define DHT11_PIN 49
+//#define DHT21_PIN 49
+
+
+//// ACTUATORS
+//#define Relay0_Pin 7
+
 
 
 //// Function Definitions
 int 	main	(void);
 void 	setup	(void);
+
+
 
 //// Object Definitions
 Plant plant_0();

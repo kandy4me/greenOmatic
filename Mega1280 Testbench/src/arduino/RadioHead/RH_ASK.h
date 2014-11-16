@@ -6,9 +6,9 @@
 #ifndef RH_ASK_h
 #define RH_ASK_h
 
-#define ASK_RX_PIN 	36
-#define ASK_TX_PIN 	42
-#define ASK_BAUD 	4800
+#define ASK_RX_PIN 	11
+#define ASK_TX_PIN 	12
+#define ASK_BAUD 	2000
 
 
 #include "RHGenericDriver.h"
@@ -254,7 +254,7 @@ public:
     /// Starts the receiver in the RF69.
     void           setModeRx();
 
-    /// If current mode is Rx or Idle, changes it to Rx. F
+    /// If current mode is Rx or Idle, changes it to Tx.
     /// Starts the transmitter in the RF69.
     void           setModeTx();
 
