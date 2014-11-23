@@ -22,8 +22,14 @@
 
 
 //// PIN DEFINITIONS
+///Analog
+#define Soil_Moisture_0_Pin A7
+
+
 /// I2C PERIPHERALS
-//
+// RTC needs no extra pins...
+
+
 /// SPI PERIPHERALS
 // Ethernet Shield ( http://arduino.cc/en/Main/ArduinoEthernetShield )
 #define WIZNET_INTERRUPT 	2 // not supported by ethernet library; need to solder jumper
