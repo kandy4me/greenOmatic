@@ -35,7 +35,7 @@
 // RF, see RH_ASK.h for more
 extern RH_ASK 	RF_Transmitter;
 #define ASK_RX_PIN 	0
-#define ASK_TX_PIN 	12
+#define ASK_TX_PIN 	25
 #define ASK_BAUD 	2400
 
 
@@ -46,7 +46,7 @@ extern dht 	DHT;
 
 
 //// ACTUATORS
-#define Relay0_Pin 7
+#define Relay0_Pin 30
 
 
 
