@@ -249,6 +249,7 @@
 #define VW_PLATFORM_GENERIC_AVR8 4
 #define VW_PLATFORM_UNO32   5
 
+//	Select platform automatically, if possible
 #ifndef VW_PLATFORM
   #define VW_PLATFORM VW_PLATFORM_ARDUINO
 #endif

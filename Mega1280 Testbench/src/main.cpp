@@ -1,8 +1,9 @@
 #include "main.h"
 
 // Objects
-dht 	DHT;
-RH_ASK 	RF_Transmitter( ASK_BAUD, ASK_RX_PIN, ASK_TX_PIN, 10, false); // (uint16_t speed, uint8_t rxPin, uint8_t txPin, uint8_t pttPin, bool pttInverted);
+dht 		DHT;
+RH_ASK 		RF_Transmitter( ASK_BAUD, ASK_RX_PIN, ASK_TX_PIN, 10, false); // (uint16_t speed, uint8_t rxPin, uint8_t txPin, uint8_t pttPin, bool pttInverted);
+RH_NRF905 	RF_Transceiver;
 
 
 typedef union
@@ -13,8 +14,8 @@ typedef union
 		unsigned long int number;
 	};
 }_status_msg;
-_status_msg status_msg;
 
+_status_msg status_msg;
 
 
 void setup(void)
@@ -33,12 +34,6 @@ void setup(void)
     RF_Transmitter.setModeTx();
     if ( !RF_Transmitter.init() ) {
          Serial.println("RadioHead init failed");
-//    } else {
-//        Serial.print("ASK RF Transmitter configured on pin ");
-//		Serial.println(ASK_TX_PIN);
-
-//		Serial.print("ASK RF configured at Baud ");
-//		Serial.println(ASK_BAUD);
     }
 
 }

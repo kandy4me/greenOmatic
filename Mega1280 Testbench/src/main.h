@@ -10,6 +10,8 @@
 
 #include "arduino/Arduino.h"
 #include "arduino/RadioHead/RH_ASK.h"
+#include "arduino/RadioHead/RHReliableDatagram.h"
+#include "arduino/RadioHead/RH_NRF905.h"
 #include "arduino/Wire/Wire.h"
 
 #include "greenOmatic/greenOmatic_core.h"
@@ -26,13 +28,16 @@
 // Ethernet Shield ( http://arduino.cc/en/Main/ArduinoEthernetShield )
 #define WIZNET_INTERRUPT 	2 // not supported by ethernet library; need to solder jumper
 #define SPI_SEL_SD 			4
+#define SPI_SEL_NRF905		6
 #define SPI_SEL_WIZNET 		10
+
 
 // RF, see RH_ASK.h for more
 extern RH_ASK 	RF_Transmitter;
 #define ASK_RX_PIN 	0
 #define ASK_TX_PIN 	12
 #define ASK_BAUD 	2400
+
 
 // DHT Sensors
 extern dht 	DHT;
@@ -41,7 +46,7 @@ extern dht 	DHT;
 
 
 //// ACTUATORS
-//#define Relay0_Pin 7
+#define Relay0_Pin 7
 
 
 

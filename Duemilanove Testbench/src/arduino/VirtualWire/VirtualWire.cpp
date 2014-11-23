@@ -7,6 +7,8 @@
 // $Id: VirtualWire.cpp,v 1.18 2014/03/26 01:09:36 mikem Exp mikem $
 
 #include "VirtualWire.h"
+// Arduino 1.0 includes crc16.h, so use it else can get clashes with other libraries
+// Teensyduino for Arduino 1.0.5 does not have crc16.h
 #include "VWutil/crc16.h"
 
 

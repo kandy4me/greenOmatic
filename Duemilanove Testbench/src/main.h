@@ -9,55 +9,49 @@
 #define MAIN_H_
 
 #include "arduino/Arduino.h"
+#include "arduino/Wire/Wire.h"
+#include "arduino/SPI/SPI.h"
+#include "arduino/EEPROM/EEPROM.h"
+
+#include "arduino/Time/Time.h"
+#include "arduino/DS1307RTC/DS1307RTC.h"
+#include "arduino/Ethernet/Ethernet.h"
 #include "arduino/VirtualWire/VirtualWire.h"
 
 #include "greenOmatic/greenOmatic_core.h"
 
+
 //// TUNING PARAMETERS
-#define LOOP_DELAY 3000 //ms
+#define LOOP_DELAY 1000 //ms
 
 
-//// PIN DEFINITIONS
-/// Serial (RS232)
-#define UART_RX 0
-#define UART_TX 1
-
-/// I2C
-#define I2C_SDA 0
-#define I2C_SCL 0
-
+//// PIN & ADDRESS DEFINITIONS
 /// I2C PERIPHERALS
 
-/// SPI
-#define SPI_MOSI 11
-#define SPI_MISO 12
-#define SPI_SCK  13
-
 /// SPI PERIPHERALS
+// Slave-Select Lines
+#define SPI_SEL_SD 			4  // SD Card Reader
+#define SPI_SEL_WIZNET 		10 // Ethernet NIC
+#define SPI_SEL_NRF905      6  // TODO
+
 // Ethernet Shield ( http://arduino.cc/en/Main/ArduinoEthernetShield )
-#define WIZNET_INTERRUPT 2// not supported by ethernet library; need to solder jumper
-#define SPI_SEL_SD 4
-#define SPI_SEL_WIZNET 10
+#define WIZNET_INTERRUPT 	2  // not supported by ethernet library; need to solder jumper
 
-// RF
-#define RF_BAUD		2000
-#define RF_RX_PIN	11
+/// Communication Channels
+// One-Wire RF
+#define RF_BAUD				2400
+#define RF_RX_PIN			3
 
-
-// DHT Sensors
-extern dht 	DHT;
-//#define DHT11_PIN 16
-//#define DHT21_PIN 49
-
-
-//// ACTUATORS
-#define Relay0_Pin 7
+// Ethernet
+uint8_t mac[] = {  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED  };
 
 
 
 //// Function Definitions
-int 	main	(void);
-void 	setup	(void);
+int 	main			(void);
+void 	setup			(void);
+void 	print2digits	(int);  // used by DS1307 lib, TODO: get rid of ASAP
+
 
 
 //// Object Definitions
