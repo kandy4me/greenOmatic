@@ -28,22 +28,20 @@
 
 /// I2C PERIPHERALS
 // RTC needs no extra pins...
+#define BH1750_ADDR			0x23
 
 
 /// SPI PERIPHERALS
-// Ethernet Shield ( http://arduino.cc/en/Main/ArduinoEthernetShield )
-#define WIZNET_INTERRUPT 	2 // not supported by ethernet library; need to solder jumper
-#define SPI_SEL_SD 			4
+// NRF905
 #define SPI_SEL_NRF905		6
-#define SPI_SEL_WIZNET 		10
+extern RH_NRF905 RF_Transceiver;
 
-
-// RF, see RH_ASK.h for more
+/// 1-wire Digital Interfaces
+// ASK RF, see RH_ASK.h for more
 extern RH_ASK 	RF_Transmitter;
 #define ASK_RX_PIN 	0
 #define ASK_TX_PIN 	25
 #define ASK_BAUD 	2400
-
 
 // DHT Sensors
 extern dht 	DHT;
@@ -56,15 +54,37 @@ extern dht 	DHT;
 
 
 
+//// Object Definitions
+Plant plant_0();
+Plant plant_1();
+
+
+
+//// STRUCTURES
+typedef union
+{
+	char container[68];
+	struct{
+		char header[6];
+		unsigned long int number;
+	};
+}_status_msg;
+_status_msg status_msg;
+
+typedef struct
+{
+	char DHT11_valid  : 1;
+	char BH1750_valid : 1;
+} Valid_Flags;
+
+
+
 //// Function Definitions
 int 	main	(void);
 void 	setup	(void);
 
+int 	DHT_read(int );
 
-
-//// Object Definitions
-Plant plant_0();
-Plant plant_1();
 
 
 #endif /* MAIN_H_ */

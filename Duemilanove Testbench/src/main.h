@@ -13,10 +13,10 @@
 #include "arduino/SPI/SPI.h"
 #include "arduino/EEPROM/EEPROM.h"
 
-#include "arduino/Time/Time.h"
-#include "arduino/DS1307RTC/DS1307RTC.h"
 #include "arduino/Ethernet/Ethernet.h"
 #include "arduino/VirtualWire/VirtualWire.h"
+#include "arduino/Time/Time.h"
+#include "arduino/DS1307RTC/DS1307RTC.h"
 
 #include "greenOmatic/greenOmatic_core.h"
 
@@ -43,20 +43,37 @@
 #define RF_RX_PIN			3
 
 // Ethernet
-uint8_t mac[] = {  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED  };
-
+uint8_t mac[] = { 0xEE, 0x69, 0x00, 0x00, 0x00, 0x00 };
 
 
 //// Function Definitions
-int 	main			(void);
-void 	setup			(void);
-void 	print2digits	(int);  // used by DS1307 lib, TODO: get rid of ASAP
+int 	main			( void );
+void 	setup			( void );
+void 	CLI				( char *, uint8_t );
+void 	print2digits	( int );  // used by DS1307 lib, TODO: get rid of ASAP
 
 
 
 //// Object Definitions
 Plant plant_0();
 Plant plant_1();
+
+
+
+//// Structures
+typedef struct _status_flags
+{
+	char time_valid   : 1;
+	char DHT11_valid  : 1;
+	char BH1750_valid : 1;
+
+	void reset (void)
+	{
+		time_valid = 0;
+		DHT11_valid = 0;
+		BH1750_valid = 0;
+	}
+};
 
 
 #endif /* MAIN_H_ */
