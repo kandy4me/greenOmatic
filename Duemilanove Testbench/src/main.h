@@ -43,7 +43,8 @@
 #define RF_RX_PIN			3
 
 // Ethernet
-uint8_t mac[] = { 0xEE, 0x69, 0x00, 0x00, 0x00, 0x00 };
+uint8_t 	mac[] 		= { 0xEE, 0x69, 0xF7, 0x55, 0x00, 0x01 };
+#define 	localPort 	8888 // local port to listen for UDP packets
 
 
 //// Function Definitions
