@@ -1,0 +1,119 @@
+server is at 192.168.1.177
+new client
+GET / HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+DNT: 1
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET /favicon.ico HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: */*
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET / HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+DNT: 1
+Referer: http://192.168.1.177/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET /favicon.ico HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: */*
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET / HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+DNT: 1
+Referer: http://192.168.1.177/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET /favicon.ico HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: */*
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET / HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+DNT: 1
+Referer: http://192.168.1.177/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET /favicon.ico HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: */*
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET / HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+DNT: 1
+Referer: http://192.168.1.177/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
+new client
+GET /favicon.ico HTTP/1.1
+Host: 192.168.1.177
+Connection: keep-alive
+Accept: */*
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+
+client disconnected
