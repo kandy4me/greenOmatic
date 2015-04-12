@@ -9,6 +9,7 @@
 #define MAIN_H_
 
 #include "arduino/Arduino.h"
+
 #include "arduino/RadioHead/RH_ASK.h"
 #include "arduino/RadioHead/RHReliableDatagram.h"
 #include "arduino/RadioHead/RH_NRF905.h"
@@ -34,14 +35,20 @@
 // NRF905
 #define SPI_SEL_NRF905		6
 
+
+
+extern RH_NRF905 RF_Transceiver;
+
 /// 1-wire Digital Interfaces
 // ASK RF, see RH_ASK.h for more
+extern RH_ASK 	RF_Transmitter;
 #define ASK_RX_PIN 	0
 #define ASK_TX_PIN 	25
 #define ASK_BAUD 	2400
 
 // DHT Sensors
-#define DHT11_PIN 49
+extern dht 	DHT;
+#define DHT11_PIN A15
 //#define DHT21_PIN 49
 
 //// ACTUATORS
@@ -56,7 +63,7 @@ typedef struct _status_flags
 #endif
 	char DHT11_valid  : 1;
 	char BH1750_valid : 1;
-
+	char NRF905_valid : 1;
 	void reset (void)
 	{
 #ifdef RTC
@@ -88,6 +95,8 @@ int 		NRF_Send    	(String);
 // All That's necessary is a String object for broadcast,
 // just because the "macros" below need them.  TODO
 extern String Broadcast_Message;
+extern volatile Plant plant_0();
+extern volatile Plant plant_1();
 
 
 //// MACROS

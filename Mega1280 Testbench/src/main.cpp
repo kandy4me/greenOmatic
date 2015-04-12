@@ -6,9 +6,11 @@ dht 			DHT;
 RH_ASK 			RF_Transmitter( ASK_BAUD, ASK_RX_PIN, ASK_TX_PIN, 10, false); // (uint16_t speed, uint8_t rxPin, uint8_t txPin, uint8_t pttPin, bool pttInverted);
 RH_NRF905 		RF_Transceiver;
 
-Plant plant_0();
-Plant plant_1();
+volatile Plant plant_0();
+volatile Plant plant_1();
 
+// stack
+char broadcast_msg[RH_ASK_MAX_MESSAGE_LEN] = {0};
 
 
 ///// FUNCTIONS /////
@@ -16,20 +18,17 @@ void setup(void)
 {
 	Serial.begin(115200);
 	Serial.println("Starting up Green-O-Matic Mega Testbed");
+	
+	
+	Serial.print("Program compiled on ");
+	Serial.print(__DATE__);
+	Serial.print(" at ");
+	Serial.println(__TIME__);
+	Serial.println();
+
+
+	// on-board LED
 	pinMode(13, OUTPUT);
-
-
-    /// RF Setup
-    RF_Transmitter.setModeTx();
-    if ( !RF_Transmitter.init() ) {
-         Serial.println("RadioHead init failed");
-    } else {
-    	Serial.print("433MHz ASK RF Transmitter configured on pin ");
-    	Serial.print(ASK_TX_PIN);
-    	Serial.print(" at ");
-    	Serial.print(ASK_BAUD);
-    	Serial.println(" baud");
-    }
 
 
 	/// Sensors
@@ -52,17 +51,55 @@ void setup(void)
     Serial.print("Discrete Relay configured on pin ");
     Serial.println(Relay0_Pin);
 
+    /// RF Setup
+    RF_Transmitter.setModeTx();
+    if ( !RF_Transmitter.init() ) {
+         Serial.println("RadioHead init failed");
+    } else {
+    	Serial.print("433MHz ASK RF Transmitter configured on pin ");
+    	Serial.print(ASK_TX_PIN);
+    	Serial.print(" at ");
+    	Serial.print(ASK_BAUD);
+    	Serial.println(" baud");
+
+		const char init_msg[] = "greenOmatic Duemilanove Startup";
+	    RF_Transmitter.send((uint8_t *)init_msg, strlen(init_msg));
+	    RF_Transmitter.waitPacketSent();
+    }
+
+    // NRF-905
+    if (!RF_Transceiver.init())
+        Serial.println("NRF905 init failed!");
+
     Serial.println();
 }
 
+void broadcast(String message)
+{
+	message.toCharArray( broadcast_msg, message.length() );
+
+	// be productive with our time: begin RF broadcast first,
+	// then everything else BEFORE waitPacketSent()
+    RF_Transmitter.send( (uint8_t *)broadcast_msg, message.length() );
+    Serial.println( broadcast_msg );
+
+    RF_Transmitter.waitPacketSent();
+
+	/*
+	const char header_msg[] = "Frame ";
+	RF_Transmitter.send((uint8_t *)msg, strlen(msg));
+	RF_Transmitter.waitPacketSent();
+	 */
+	//RF_Transmitter.send((uint8_t *)status_msg, 9+strlen((const char*)status_msg));
+	//RF_Transmitter.send((uint8_t *)status_msg.container, 70);
+	//RF_Transmitter.waitPacketSent();
+	//Serial.println(*status_msg);
+}
 
 int main(void)
 {
 	init();
 	setup();
-
-    /// runtime stacks
-
 
     /// loop control
 	for( unsigned long int frame=0;;frame++)
@@ -77,10 +114,10 @@ int main(void)
 
 		/// Read in sensor values
 	    // Soil Moisture
-	    unsigned int val = analogRead(Soil_Moisture_0_Pin);    // read the input pin
+	    unsigned int Soil_Moisture_0_Reading = analogRead(Soil_Moisture_0_Pin);    // read the input pin
 
 	    String STR_analog = ("ADC reading : ");
-	    STR_analog.concat(val);
+	    STR_analog.concat(Soil_Moisture_0_Reading);
 	    Broadcast_Message.concat(STR_analog);
 	    Broadcast_Message.concat("\n");
 	    Serial.println(STR_analog);
@@ -131,6 +168,7 @@ int main(void)
 		broadcast_Transmit(Broadcast_Message);
 
 	    Serial.println();
+		
 		digitalWrite(13, LOW);
 
 		delay (LOOP_DELAY);
@@ -167,6 +205,47 @@ int DHT11_update (int pin)
 
 	// TODO: error checking
 	return 0;
+	
+	/*
+	// DHT sensor(s)
+		int DHT11_chk = DHT.read11(DHT11_PIN);
+		switch (DHT11_chk)
+		{
+			case DHTLIB_OK:
+			{
+				char humidity_chars[5];
+				char temperature_chars[5];
+
+				dtostrf(DHT.humidity, 5, 2, humidity_chars);
+				dtostrf(DHT.temperature, 5, 2, temperature_chars);
+
+				String DHT_msg = "DHT11 : ";
+				DHT_msg.concat(humidity_chars);
+				DHT_msg.concat("RH, ");
+				DHT_msg.concat(temperature_chars);
+				DHT_msg.concat("degC");
+
+				broadcast(DHT_msg);
+
+				break;
+			}
+			case DHTLIB_ERROR_CHECKSUM:
+			{
+				Serial.println("DHT11 Checksum error!\t");
+				break;
+			}
+			case DHTLIB_ERROR_TIMEOUT:
+			{
+				Serial.println("DHT11 Time-out error!\t");
+				break;
+			}
+			default:
+			{
+				Serial.println("DHT11 Unknown error!!!\t");
+				break;
+			}
+		}
+	*/
 }
 
 uint16_t Light_read (int addr)
@@ -233,5 +312,4 @@ int NRF_Send (String message)
 {
 	return 0;
 }
-
 
