@@ -43,7 +43,7 @@ extern RH_NRF905 RF_Transceiver;
 // ASK RF, see RH_ASK.h for more
 extern RH_ASK 	RF_Transmitter;
 #define ASK_RX_PIN 	0
-#define ASK_TX_PIN 	25
+#define ASK_TX_PIN 	7
 #define ASK_BAUD 	2400
 
 // DHT Sensors

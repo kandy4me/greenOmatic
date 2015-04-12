@@ -28,10 +28,10 @@ public:
 
 
 private:
-	unsigned int 	sensor_ID;
-	sensor_types 	type;
-	interface_types interface;
+	byte 			sensor_ID;
 	unsigned int    pin;
+	interface_types interface;
+	sensor_types 	type;
 	//unsigned int 	refresh_ms;
 
 };

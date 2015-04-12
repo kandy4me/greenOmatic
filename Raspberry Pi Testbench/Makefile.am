@@ -1,0 +1,1 @@
+SUBDIRS=RfCommander include exampleProgram
