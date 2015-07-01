@@ -114,7 +114,7 @@ uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder);
 void attachInterrupt(uint8_t, void (*)(void), int mode);
 void detachInterrupt(uint8_t);
 
-void setup(void);
+void Setup(void);
 void loop(void);
 
 // Get the bit location within the hardware port of the given virtual pin.

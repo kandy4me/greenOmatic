@@ -3,6 +3,7 @@
 	<name>greenOmatic_Mega</name>
 	<comment></comment>
 	<projects>
+		<project>ArduinoLib</project>
 		<project>greenOmatic_core</project>
 	</projects>
 	<buildSpec>

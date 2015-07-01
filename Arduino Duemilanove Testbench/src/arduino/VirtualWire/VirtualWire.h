@@ -275,7 +275,7 @@
 
 #ifndef VW_MAX_MESSAGE_LEN 
 /// Maximum number of bytes in a message, counting the byte count and FCS
-	#define VW_MAX_MESSAGE_LEN 80
+	#define VW_MAX_MESSAGE_LEN 128
 #endif //VW_MAX_MESSAGE_LEN 
 
 #if !defined(VW_RX_SAMPLES_PER_BIT)
@@ -287,7 +287,7 @@
 #define VW_MAX_PAYLOAD VW_MAX_MESSAGE_LEN-3
 
 /// The size of the receiver ramp. Ramp wraps modulo this number
-#define VW_RX_RAMP_LEN 160
+#define VW_RX_RAMP_LEN 255
 
 // Ramp adjustment parameters
 // Standard is if a transition occurs before VW_RAMP_TRANSITION (80) in the ramp,

@@ -3,6 +3,7 @@
 	<name>greenOmatic_Duemilanove_Testbench</name>
 	<comment></comment>
 	<projects>
+		<project>ArduinoLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

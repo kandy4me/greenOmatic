@@ -29,7 +29,7 @@
 #endif //RH_ASK_RX_SAMPLES_PER_BIT  
 
 /// The size of the receiver ramp. Ramp wraps modulo this number
-#define RH_ASK_RX_RAMP_LEN 160
+#define RH_ASK_RX_RAMP_LEN 255
 
 // Ramp adjustment parameters
 // Standard is if a transition occurs before RH_ASK_RAMP_TRANSITION (80) in the ramp,
