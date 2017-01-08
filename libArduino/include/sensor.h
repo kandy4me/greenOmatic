@@ -1,39 +1,31 @@
-#ifndef SENSOR_H_
-#define SENSOR_H_
+#ifndef GREENOMATIC_SENSOR_H_
+#define GREENOMATIC_SENSOR_H_
 
-
-/// DHT11 Digital Temperature Humidity Sensor Module
-/// DHT21 Capacitive Digital Temperature & Humidity Sensor
-#include "../arduino/DHT_lib/DHTlib.h"
-
-
-/// DS18B20 Stainless Steel Temperature Sensor
-// via http://arduino-info.wikispaces.com/Brick-Temperature-DS18B20
-
+#include "arduino_includes.h"
+#include "hardware.h"
 
 class sensor {
 public:
-	// types
-	typedef enum { temperature, humidity, moisture, light, pH } sensor_types;
-	typedef enum { discrete, PWM, analog, I2C, SPI, UART } 		interface_types;
+  // types
+  typedef enum { temperature, humidity, moisture, light, pH } sensor_types;
+  typedef enum { discrete, PWM, analog, I2C, SPI, UART } interface_types;
 
-	// control & status
-	sensor ();
-	sensor (unsigned int, sensor_types, interface_types, unsigned int);
-	virtual ~sensor();
+  // control & status
+  sensor ();
+  sensor (unsigned int, sensor_types, interface_types, unsigned int);
+  virtual ~sensor();
 
-	unsigned int 	get_ID(void) 	{ return sensor_ID; }
-	sensor_types 	get_type(void) 	{ return type; }
-	interface_types get_interface() { return interface; }
-
+  unsigned int    get_ID(void) 	{ return sensor_ID; }
+  sensor_types    get_type(void) 	{ return type; }
+  interface_types get_interface() { return interface; }
 
 private:
-	byte 			sensor_ID;
-	unsigned int    pin;
-	interface_types interface;
-	sensor_types 	type;
-	//unsigned int 	refresh_ms;
-
+  byte            sensor_ID;
+  unsigned int    pin;
+  interface_types interface;
+  sensor_types    type;
+  unsigned int    refresh_ms;
 };
 
-#endif /* SENSOR_H_ */
+
+#endif /* GREENOMATIC_SENSOR_H_ */
